@@ -16,7 +16,7 @@ df[categorical_cols] = df[categorical_cols].astype(str)
 # Cargar modelo entrenado de clasificación
 try:
     with st.spinner("Cargando el modelo de clasificación..."):
-        modelo_clasificacion = joblib.load("model_classification.joblib")
+        modelo_clasificacion = joblib.load("models/model_classification.joblib")
     st.success("✅ Modelo cargado correctamente")
 except Exception as e:
     st.error(f"❌ Error al cargar el modelo: {e}")

@@ -14,7 +14,7 @@ df[categorical_cols] = df[categorical_cols].astype(str)
 # Cargar modelo entrenado
 try:
     with st.spinner("Cargando el modelo de predicción..."):
-        modelo = joblib.load("model_regression.joblib")
+        modelo = joblib.load("models/model_regression.joblib")
     st.success("✅ Modelo cargado correctamente")
 except Exception as e:
     st.error(f"❌ Error al cargar el modelo: {e}")

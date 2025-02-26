@@ -1,4 +1,5 @@
 # =================== Importaciones ===================
+import importlib
 import streamlit as st
 import pandas as pd
 import seaborn as sns
@@ -28,13 +29,18 @@ seccion = st.sidebar.radio(
     format_func=lambda x: f"**{x}**"
 )
 
-# Redirigir a las páginas correctas
-if seccion == "📊 Análisis Exploratorio":
-    st.switch_page("pages/1_EDA.py")
+# =================== Cargar la Página Correspondiente ===================
+if seccion == "🏠 Inicio":
+    st.markdown("# Bienvenido a Diamond Analytics 🏠")
+    st.write("Explora los datos y realiza predicciones con modelos de Machine Learning.")
+elif seccion == "📊 Análisis Exploratorio":
+    importlib.import_module("app_pages.EDAs")
 elif seccion == "📈 Regresión":
-    st.switch_page("pages/2_Regresion.py")
+    importlib.import_module("app_pages.Regresion")
 elif seccion == "⚡ Clasificación":
-    st.switch_page("pages/3_Clasificacion.py")
+    importlib.import_module("app_pages.Clasificacion")
+elif seccion == "🧪 Simulador":
+    importlib.import_module("app_pages.Simulador")
 
 # Información del dataset en sidebar
 with st.sidebar.expander("ℹ️ Información del Dataset"):

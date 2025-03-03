@@ -72,17 +72,6 @@ streamlit run Home.py
 
 ---
 
-## 📸 Capturas de Pantalla  
-
-📌 *(Aquí puedes agregar imágenes de la interfaz de tu aplicación para hacerlo más atractivo).*  
-
-Ejemplo:  
-```md
-![Interfaz Principal](ruta/a/imagen.png)
-```
-
----
-
 ## 👨‍💻 Autor  
 
 📚 **Desarrollado por:**  

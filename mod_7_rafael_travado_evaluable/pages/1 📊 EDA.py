@@ -5,8 +5,58 @@ import numpy as np
 import plotly.express as px
 import matplotlib.pyplot as plt
 
-# Cargar el Dataset 
-df = sns.load_dataset("diamonds")
+# =================== Cargar el Dataset desde session_state ===================
+if "diamond_data" in st.session_state:
+    df = st.session_state.diamond_data
+else:
+    st.error("⚠️ Error: No se ha encontrado el dataset. Regresa a la página de inicio.")
+    st.stop()  # Detener la ejecución para evitar errores
+    
+
+# =================== Información del Dataset ===================
+with st.sidebar.expander("📂 **Información del Dataset**", expanded=True):
+    st.markdown(f"""
+    <div style="font-size: 14px;">
+    - 🔹 <b>Registros:</b> {df.shape[0]:,}  
+    - 🔸 <b>Variables:</b> {df.shape[1]}  
+    - 📊 <b>Memoria:</b> {df.memory_usage(deep=True).sum() / (1024*1024):.2f} MB  
+    </div>
+    """, unsafe_allow_html=True)
+
+st.sidebar.markdown("<hr style='border:1px solid #ddd;'>", unsafe_allow_html=True)
+
+# =================== Información del Autor ===================
+st.sidebar.markdown("""
+<div style="text-align: center;">
+    <h3 style="color: #333;">👨‍💻 <b>Autor del Proyecto</b></h3>
+    <p style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">Rafael Travado Fernández</p>
+    <p style="font-size: 14px; font-style: italic; color: #666;">📚 Bootcamp Data Science 2025</p>
+</div>
+""", unsafe_allow_html=True)
+
+# =================== Enlaces a Redes Sociales ===================
+st.sidebar.markdown("""
+<div style="text-align: center;">
+    <a href="https://github.com/Rafael-TF" target="_blank">
+        <img src="https://img.shields.io/badge/GitHub-000?style=for-the-badge&logo=github&logoColor=white" width="110">
+    </a>  
+    <a href="https://www.linkedin.com/in/rafael-travado-4a1b6437/" target="_blank">
+        <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" width="110">
+    </a>  
+    <a href="https://rafaeltravado.netlify.app/" target="_blank">
+        <img src="https://img.shields.io/badge/Portfolio-3A86FF?style=for-the-badge&logo=google-chrome&logoColor=white" width="110">
+    </a>
+</div>
+""", unsafe_allow_html=True)
+
+st.sidebar.markdown("<hr style='border:1px solid #ddd;'>", unsafe_allow_html=True)
+
+# =================== Información Adicional ===================
+st.sidebar.markdown("""
+**📝 Última actualización:** Marzo 2025  
+**📊 Desarrollado con:** Python, Streamlit, Seaborn, Plotly  
+**💡 Objetivo:** Predicción de precios y clasificación de diamantes  
+""", unsafe_allow_html=True)
 
 # =================== Análisis Exploratorio ===================
 
@@ -27,14 +77,6 @@ descubrir patrones clave en los datos y comprender mejor las relaciones entre la
 
 Utiliza los filtros en el panel lateral para personalizar tu análisis 👉
 """)
-
-# Contenedor con borde para los filtros
-st.sidebar.markdown("""
-<div style="background-color: #f8f9fa; padding: 10px; border-radius: 10px; border-left: 5px solid #4364f7;">
-    <h3 style="color: #4364f7; margin-top: 0;">🎛️ Filtros de Análisis</h3>
-    <p style="font-size: 0.9em; color: #666;">Personaliza la visualización según tus intereses</p>
-</div>
-""", unsafe_allow_html=True)
 
 # Formulario de filtros con diseño mejorado
 with st.form("filters_form"):
@@ -497,10 +539,11 @@ st.markdown(f"""
 Continúa tu exploración en las siguientes secciones para ver los modelos predictivos.
 """)
 
-# Pie de página
+# =================== Footer ===================
 st.markdown("---")
 st.markdown("""
-<p style="text-align: center; color: #666; font-size: 0.9em;">
-    Análisis exploratorio completado • Datos actualizados • Continúa con los modelos
-</p>
+<div style='text-align: center; color: #555; font-size: 14px;'>
+     Desarrollado para el Bootcamp Data Science 2025 
+    <p style='color: #777; font-size: 12px;'>Última actualización: Marzo 2025</p>
+</div>
 """, unsafe_allow_html=True)

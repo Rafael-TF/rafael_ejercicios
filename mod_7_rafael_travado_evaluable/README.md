@@ -7,7 +7,7 @@ Este proyecto implementa **modelos de Machine Learning** para la **predicción d
 
 🌍 Accede a la Aplicación Desplegada
 
-🔗 Diamond Analytics - App
+🔗 [Diamond Analytics - App](https://machine-learning-diamonds-rafaeltravado.streamlit.app/)
 
 ## 🚀 Características Principales  
 ✅ **Análisis Exploratorio de Datos (EDA)** con visualizaciones avanzadas.  

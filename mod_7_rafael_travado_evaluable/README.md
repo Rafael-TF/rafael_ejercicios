@@ -5,6 +5,10 @@
 
 Este proyecto implementa **modelos de Machine Learning** para la **predicción de precios** y la **clasificación de la calidad del corte** de diamantes. Utiliza **Streamlit** para la visualización interactiva y exploración de datos.  
 
+🌍 Accede a la Aplicación Desplegada
+
+🔗 Diamond Analytics - App
+
 ## 🚀 Características Principales  
 ✅ **Análisis Exploratorio de Datos (EDA)** con visualizaciones avanzadas.  
 ✅ **Modelo de Regresión** para predecir el precio del diamante.  

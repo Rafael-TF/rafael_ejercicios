@@ -14,14 +14,6 @@ Este proyecto implementa **modelos de Machine Learning** para la **predicción d
 
 ---
 
-## 📦 Instalación  
-
-### 1️⃣ **Clona este repositorio**  
-```bash
-git clone https://github.com/TU_USUARIO/TU_REPOSITORIO.git
-cd TU_REPOSITORIO
-```
-
 ### 2️⃣ **Instala las dependencias**  
 ```bash
 pip install -r requirements.txt

@@ -1,4 +1,6 @@
+import os
 import time
+import gdown
 import joblib
 import streamlit as st
 import pandas as pd
@@ -13,14 +15,34 @@ else:
     st.error("⚠️ Error: No se ha encontrado el dataset. Regresa a la página de inicio.")
     st.stop()
 
+# =================== Configurar la URL del modelo en Google Drive ===================
+modelo_path = "models/model_classification.joblib"
+modelo_drive_url = "https://drive.google.com/uc?id=1O7E7Q4u3bn4AuVn5tkIizLhgtDnqTBew"
+
 # =================== Cargar el Modelo de Clasificación ===================
-try:
-    with st.spinner("Cargando el modelo de clasificación..."):
-        modelo_clasificacion = joblib.load("models/model_classification.joblib")
-    st.success("✅ Modelo cargado correctamente")
-except Exception as e:
-    st.error(f"❌ Error al cargar el modelo: {e}")
-    st.stop()
+if os.path.exists(modelo_path):
+    try:
+        with st.spinner("Cargando el modelo de clasificación..."):
+            modelo_clasificacion = joblib.load(modelo_path)
+        st.success("✅ Modelo cargado correctamente")
+    except Exception as e:
+        st.error(f"❌ Error al cargar el modelo: {e}")
+        st.stop()
+else:
+    st.warning("⚠️ No se encontró el modelo local. Descargando desde Google Drive...")
+
+    try:
+        with st.spinner("Descargando modelo de clasificación desde Google Drive..."):
+            gdown.download(modelo_drive_url, modelo_path, quiet=False)
+        
+        # Cargar el modelo descargado
+        with st.spinner("Cargando el modelo descargado..."):
+            modelo_clasificacion = joblib.load(modelo_path)
+        
+        st.success("✅ Modelo descargado y cargado correctamente desde Google Drive")
+    except Exception as e:
+        st.error(f"❌ Error al descargar el modelo: {e}")
+        st.stop()
     
 # =================== Información del Dataset ===================
 with st.sidebar.expander("📂 **Información del Dataset**", expanded=True):

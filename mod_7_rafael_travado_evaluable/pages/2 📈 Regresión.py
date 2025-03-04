@@ -1,4 +1,6 @@
+import os
 import time
+import gdown
 import joblib
 import streamlit as st
 import pandas as pd
@@ -14,14 +16,34 @@ else:
     st.error("⚠️ Error: No se ha encontrado el dataset. Regresa a la página de inicio.")
     st.stop()
 
+# =================== Configurar la URL del modelo en Google Drive ===================
+modelo_path = "models/model_regression.joblib"
+modelo_drive_url = "https://drive.google.com/uc?id=1_BXt5mN391zac33WmvliAOKD7KalBzRe"
+
 # =================== Cargar el Modelo ===================
-try:
-    with st.spinner("Cargando el modelo de predicción..."):
-        modelo = joblib.load("models/model_regression.joblib")
-    st.success("✅ Modelo cargado correctamente")
-except Exception as e:
-    st.error(f"❌ Error al cargar el modelo: {e}")
-    st.stop()
+if os.path.exists(modelo_path):
+    try:
+        with st.spinner("Cargando el modelo de predicción..."):
+            modelo = joblib.load(modelo_path)
+        st.success("✅ Modelo cargado correctamente")
+    except Exception as e:
+        st.error(f"❌ Error al cargar el modelo: {e}")
+        st.stop()
+else:
+    st.warning("⚠️ No se encontró el modelo local. Descargando desde Google Drive...")
+
+    try:
+        with st.spinner("Descargando modelo de regresión desde Google Drive..."):
+            gdown.download(modelo_drive_url, modelo_path, quiet=False)
+        
+        # Cargar el modelo descargado
+        with st.spinner("Cargando el modelo descargado..."):
+            modelo = joblib.load(modelo_path)
+        
+        st.success("✅ Modelo descargado y cargado correctamente desde Google Drive")
+    except Exception as e:
+        st.error(f"❌ Error al descargar el modelo: {e}")
+        st.stop()
 
 # =================== Sidebar con Información ===================
 with st.sidebar.expander("📂 **Información del Dataset**", expanded=True):

@@ -23,26 +23,25 @@ modelo_path = "model_regression.joblib"  # Ruta simple sin carpeta
 # =================== Cargar el Modelo de Regresión ===================
 if os.path.exists(modelo_path):
     try:
-        with st.spinner("Cargando el modelo de regresión..."):
+        with st.spinner("Cargando el modelo de regresión desde local..."):
             modelo = joblib.load(modelo_path)
-        st.success("✅ Modelo cargado correctamente")
+        st.success("✅ Modelo cargado correctamente desde local")
     except Exception as e:
-        st.error(f"❌ Error al cargar el modelo: {e}")
+        st.error(f"❌ Error al cargar el modelo local: {e}")
         st.stop()
 else:
-    st.warning("⚠️ No se encontró el modelo local. Descargando desde Google Drive...")
+    st.warning("⚠️ No se encontró el modelo local. Intentando descargar desde Google Drive...")
 
     try:
         with st.spinner("Descargando modelo de regresión desde Google Drive..."):
             gdown.download(modelo_drive_url, modelo_path, quiet=False)
 
-        # Cargar el modelo directamente desde la memoria
         with st.spinner("Cargando el modelo descargado..."):
             modelo = joblib.load(modelo_path)
 
         st.success("✅ Modelo descargado y cargado correctamente desde Google Drive")
     except Exception as e:
-        st.error(f"❌ Error al descargar el modelo: {e}")
+        st.error(f"❌ Error al descargar el modelo: {e}. No se puede continuar sin el modelo.")
         st.stop()
 
 # =================== Sidebar con Información ===================

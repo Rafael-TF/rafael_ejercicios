@@ -15,33 +15,32 @@ else:
     st.error("⚠️ Error: No se ha encontrado el dataset. Regresa a la página de inicio.")
     st.stop()
 
-# =================== Configurar la URL del modelo en Google Drive ===================
-modelo_path = "models/model_classification.joblib"
+# =================== URL del modelo en Google Drive ===================
+modelo_path = "model_classification.joblib"  # Ruta simple sin carpeta
 modelo_drive_url = "https://drive.google.com/uc?id=1O7E7Q4u3bn4AuVn5tkIizLhgtDnqTBew"
 
 # =================== Cargar el Modelo de Clasificación ===================
 if os.path.exists(modelo_path):
     try:
-        with st.spinner("Cargando el modelo de clasificación..."):
+        with st.spinner("Cargando el modelo de clasificación desde local..."):
             modelo_clasificacion = joblib.load(modelo_path)
-        st.success("✅ Modelo cargado correctamente")
+        st.success("✅ Modelo cargado correctamente desde local")
     except Exception as e:
-        st.error(f"❌ Error al cargar el modelo: {e}")
+        st.error(f"❌ Error al cargar el modelo local: {e}")
         st.stop()
 else:
-    st.warning("⚠️ No se encontró el modelo local. Descargando desde Google Drive...")
+    st.warning("⚠️ No se encontró el modelo local. Intentando descargar desde Google Drive...")
 
     try:
         with st.spinner("Descargando modelo de clasificación desde Google Drive..."):
             gdown.download(modelo_drive_url, modelo_path, quiet=False)
-        
-        # Cargar el modelo descargado
+
         with st.spinner("Cargando el modelo descargado..."):
             modelo_clasificacion = joblib.load(modelo_path)
-        
+
         st.success("✅ Modelo descargado y cargado correctamente desde Google Drive")
     except Exception as e:
-        st.error(f"❌ Error al descargar el modelo: {e}")
+        st.error(f"❌ Error al descargar el modelo: {e}. No se puede continuar sin el modelo.")
         st.stop()
     
 # =================== Información del Dataset ===================

@@ -16,14 +16,14 @@ else:
     st.error("⚠️ Error: No se ha encontrado el dataset. Regresa a la página de inicio.")
     st.stop()
 
-# =================== Configurar la URL del modelo en Google Drive ===================
-modelo_path = "models/model_regression.joblib"
+# =================== URL del modelo en Google Drive ===================
 modelo_drive_url = "https://drive.google.com/uc?id=1_BXt5mN391zac33WmvliAOKD7KalBzRe"
+modelo_path = "model_regression.joblib"  # Ruta simple sin carpeta
 
-# =================== Cargar el Modelo ===================
+# =================== Cargar el Modelo de Regresión ===================
 if os.path.exists(modelo_path):
     try:
-        with st.spinner("Cargando el modelo de predicción..."):
+        with st.spinner("Cargando el modelo de regresión..."):
             modelo = joblib.load(modelo_path)
         st.success("✅ Modelo cargado correctamente")
     except Exception as e:
@@ -35,11 +35,11 @@ else:
     try:
         with st.spinner("Descargando modelo de regresión desde Google Drive..."):
             gdown.download(modelo_drive_url, modelo_path, quiet=False)
-        
-        # Cargar el modelo descargado
+
+        # Cargar el modelo directamente desde la memoria
         with st.spinner("Cargando el modelo descargado..."):
             modelo = joblib.load(modelo_path)
-        
+
         st.success("✅ Modelo descargado y cargado correctamente desde Google Drive")
     except Exception as e:
         st.error(f"❌ Error al descargar el modelo: {e}")
